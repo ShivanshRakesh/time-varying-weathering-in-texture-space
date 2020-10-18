@@ -29,6 +29,8 @@
 
 ### Problem Definition
 
+![Process](images/process.png)
+
 Given an input image of a weathered texture, our project aims to synthesize a series of textures emulating a weathering and de-weathering pro-cesses, yielding a time-varying texture. This would be done by computing an estimated age map of the texture based on the prevalence of similar patches in the texture. Further, using this age map, an intact texture would be generated to achieve the desired results. 
 
 To produce de-weathered textures, the age map has to be manipulated to control an interpolation of the intact texture and the input texture. Weathered textures can be synthesized by extrapolating the differences between the input texture and the intact texture.
