@@ -54,10 +54,15 @@ def decouple(img, type=0):
     return intensity_layer,gradient
 
 
-def Construct(textureImgArray, targetImgArray, blockSize, overlapSize, alpha=0.1, tolerance=0.1, finalImage=None):
+def Construct(textureImgArray, targetImgArray, blockSize, overlapSize, alpha=0.1, tolerance=0.1, finalImage=None, compareImage=None, stochastic_mask=None):
     
     texture_lum, texture_grd = decouple(textureImgArray)
     target_lum, target_grd = decouple(targetImgArray)
+
+    try:
+        compare_lum, compare_grd = decouple(compareImage)
+    except:
+        compare_lum, compare_grd = None, None
 
     # print(textureImgArray.shape, targetImgArray.shape)
     outSizeX = targetImgArray.shape[0]
@@ -98,10 +103,24 @@ def Construct(textureImgArray, targetImgArray, blockSize, overlapSize, alpha=0.1
             trg_lum = target_lum[startX:endX,startY:endY]
             trg_grd = target_grd[startX:endX,startY:endY]
 
-            matchBlock, matchBlock_lum, matchBlock_grd = MatchBlock(textureImgArray, texture_lum, texture_grd, 
+            matchBlock, matchBlock_lum, matchBlock_grd, cx, cy = MatchBlock(textureImgArray, texture_lum, texture_grd, 
                                                                     toFill[:,:,0], toFill_lum, toFill_grd, 
                                                                     trg_lum, trg_grd, 
-                                                                    blockSize, alpha, tolerance)
+                                                                    blockSize, alpha, tolerance, stochastic_mask)
+            try:
+                comparePatch, comparePatch_lum, comparePatch_grd = compareImage[cx:cx+toFill.shape[0], cy:cy+toFill.shape[1]],\
+                                                                   compare_lum[cx:cx+toFill.shape[0], cy:cy+toFill.shape[1]],\
+                                                                   compare_grd[cx:cx+toFill.shape[0], cy:cy+toFill.shape[1]]
+
+                targetPatch, targetPatch_lum, targetPatch_grd = targetImgArray[cx:cx+toFill.shape[0], cy:cy+toFill.shape[1]],\
+                                                                target_lum[cx:cx+toFill.shape[0], cy:cy+toFill.shape[1]],\
+                                                                target_lum[cx:cx+toFill.shape[0], cy:cy+toFill.shape[1]]
+
+                diffs = np.array([SQDIFF(comparePatch_lum, comparePatch_grd, targetPatch_lum, targetPatch_grd), SQDIFF(matchBlock_lum, matchBlock_grd, targetPatch_lum, targetPatch_grd)])
+                if np.argmax(diffs) == 0:
+                    matchBlock, matchBlock_lum, matchBlock_grd = comparePatch, comparePatch_lum, comparePatch_grd
+            except:
+                pass
 
             B1EndY = startY+overlapSize-1
             B1StartY = B1EndY-(matchBlock.shape[1])+1
@@ -152,6 +171,8 @@ scale = lambda x, top=255: (top * (x - np.min(x))) / (np.max(x) - np.min(x))
 inrange = lambda x: np.where(x > 255, 255, np.where(x < 0, 0, x))
 invert = lambda x: np.max(x) - x
 
+SQDIFF = lambda sI, sG, tI, tG: np.sqrt(np.sum((sI - tI)**2)) + np.sqrt(np.sum((sG - tG)**2))
+
 def calc_over_error(sI, sG, tI, tG, mask):
 
     sI, tI = sI.astype('uint8'), tI.astype('uint8')
@@ -173,7 +194,7 @@ def calc_corresp_error(sI, tI, mask):
     
     return lum
 
-def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_lum, target_grd, blockSize, alpha, tolerance):
+def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_lum, target_grd, blockSize, alpha, tolerance, stochastic_mask = None):
 
     [m,n] = toFill.shape
  
@@ -183,6 +204,12 @@ def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_
     corresp_error = calc_corresp_error(target_lum, full_lum, mask)
     
     error = (alpha * overlap_error) + ((1-alpha) * corresp_error)
+
+    try:
+        stochastic_mask = 1-stochastic_mask
+        error[stochastic_mask] = np.inf
+    except:
+        pass
   
     minVal = np.nanmin(error)
     
@@ -200,4 +227,4 @@ def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_
         raise ValueError
         
     x, y = bestBlocksx[c], bestBlocksy[c]
-    return full[x:x+m, y:y+n], full_lum[x:x+m, y:y+n], full_grd[x:x+m, y:y+n]
+    return full[x:x+m, y:y+n], full_lum[x:x+m, y:y+n], full_grd[x:x+m, y:y+n], x, y
