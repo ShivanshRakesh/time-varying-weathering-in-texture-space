@@ -163,7 +163,7 @@ def Construct(textureImgArray, targetImgArray, blockSize, overlapSize, alpha=0.1
             if endY == outSizeY:
                 break
         if endX == outSizeX:
-            print("100% complete!", end="\r", flush = True)
+            print("100% complete!..", end="\r", flush = True)
             break
     return finalImage
 
