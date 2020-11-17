@@ -180,7 +180,7 @@ def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_
     mask = ((toFill+0.99)>0.1).astype('uint8')
     overlap_error = np.sqrt(calc_over_error(toFill_lum, toFill_grd, full_lum, full_grd, mask))
 
-    corresp_error = calc_corresp_error(target_lum, target_grd, full_lum, full_grd, mask)
+    corresp_error = calc_corresp_error(target_lum, full_lum, mask)
     
     error = (alpha * overlap_error) + ((1-alpha) * corresp_error)
   
@@ -193,7 +193,10 @@ def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_
     except:
         print(np.isnan(overlap_error).any())
         print(np.isnan(corresp_error).any())
+        print(alpha, (1-alpha))
+        print(np.max(overlap_error), np.max(corresp_error), (alpha * np.max(overlap_error)) + ((1-alpha) * np.max(corresp_error)))
         print(minVal)
+        print(np.where(error <= minVal * (1.0+tolerance)))
         raise ValueError
         
     x, y = bestBlocksx[c], bestBlocksy[c]
