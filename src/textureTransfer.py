@@ -202,8 +202,12 @@ def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_
     overlap_error = np.sqrt(calc_over_error(toFill_lum, toFill_grd, full_lum, full_grd, mask))
 
     corresp_error = calc_corresp_error(target_lum, full_lum, mask)
+#     corresp_error = scale(corresp_error, 1)
+#     overlap_error = scale(overlap_error, 1)
     
     error = (alpha * overlap_error) + ((1-alpha) * corresp_error)
+    error = np.nan_to_num(scale(error,1))
+    
 
     try:
         stochastic_mask = 1-stochastic_mask
