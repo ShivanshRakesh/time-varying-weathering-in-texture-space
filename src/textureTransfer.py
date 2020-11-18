@@ -39,7 +39,7 @@ def decouple(img, type=0):
     
     with np.errstate(divide='ignore', invalid='ignore'):
         intensity_layer = np.nan_to_num(np.true_divide(((img[:, :, 0]**2) + (img[:, :, 1]**2) + (img[:, :, 2]**2)) , (img[:,:,0]+img[:, :, 1]+img[:, :, 2])))
-        intensity_layer = np.rint(intensity_layer).astype('int')
+        intensity_layer = np.rint(intensity_layer).astype('uint8')
         
         if type < 2:
             dx = apply_filter(intensity_layer.astype('float64'), prewitt[0])
@@ -206,7 +206,8 @@ def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_
 #     overlap_error = scale(overlap_error, 1)
     
     error = (alpha * overlap_error) + ((1-alpha) * corresp_error)
-    error = np.nan_to_num(scale(error,1))
+#     error = np.nan_to_num(scale(error,1))
+    error[error<0]=np.inf
     
 
     try:
