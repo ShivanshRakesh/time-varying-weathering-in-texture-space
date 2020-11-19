@@ -25,12 +25,12 @@ The directory structure of the project is as follows :
 │   └── DIP Presentation.pptx
 ├── guidelines.md
 ├── images
+│   └── outputs
 ├── proposal.md
 ├── README.md
 └── src
     ├── minimumCostPathFunc.py
     ├── project.ipynb
-    ├── __pycache__
     └── textureTransfer.py
 ```
 ## Installing Dependencies 
@@ -41,12 +41,9 @@ pip install -r requirements.txt
 ```
 ## Images Required :
 > The input images required for the project can be found in this link.
-\newline
-### [Input Images](https://google.com)
+### [images](https://drive.google.com/drive/folders/1z33_-5WgsFt1YqEMqCVcNJwen1u9VDFq?usp=sharing)
 
-> It is required that all the downloaded images must be **copied to the images directory** in the project. All images have been named with proper formats.
-\newline
-### [Output  Images](https://google.com)
+> Note: It is required that all the downloaded images must be **copied to the images directory** in the project. All images have been named with proper formats.
 
 ## Launching the Jupyter Notebook
 In order to Launch the Project , 
