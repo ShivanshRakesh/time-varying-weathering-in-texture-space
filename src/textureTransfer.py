@@ -174,25 +174,26 @@ invert = lambda x: np.max(x) - x
 SQDIFF = lambda sI, sG, tI, tG: np.sqrt(np.sum((sI - tI)**2)) + np.sqrt(np.sum((sG - tG)**2))
 
 def calc_over_error(sI, sG, tI, tG, mask):
+    with np.errstate(divide='ignore', invalid='ignore'):
+        sI, tI = sI.astype('uint8'), tI.astype('uint8')
+        sG, tG = np.rint(scale(sG)).astype('uint8'), np.rint(scale(tG)).astype('uint8')
 
-    sI, tI = sI.astype('uint8'), tI.astype('uint8')
-    sG, tG = np.rint(scale(sG)).astype('uint8'), np.rint(scale(tG)).astype('uint8')
+        Y, X = sI.shape
+        wdth_y, wdth_x = Y//2, X//2
 
-    Y, X = sI.shape
-    wdth_y, wdth_x = Y//2, X//2
-   
-    lum = cv2.matchTemplate(tI, sI, cv2.TM_SQDIFF, mask=mask)
-    grd = cv2.matchTemplate(tG, sG, cv2.TM_SQDIFF, mask=mask)
+        lum = cv2.matchTemplate(tI, sI, cv2.TM_SQDIFF, mask=mask)
+        grd = cv2.matchTemplate(tG, sG, cv2.TM_SQDIFF, mask=mask)
 
-    return lum+grd
+        return lum+grd
 
 def calc_corresp_error(sI, tI, mask):
+    with np.errstate(divide='ignore', invalid='ignore'):
 
-    sI, tI = sI.astype('uint8'), tI.astype('uint8')
- 
-    lum = cv2.matchTemplate(tI, sI, cv2.TM_SQDIFF, mask=mask)
-    
-    return lum
+        sI, tI = sI.astype('uint8'), tI.astype('uint8')
+
+        lum = cv2.matchTemplate(tI, sI, cv2.TM_SQDIFF, mask=mask)
+
+        return lum
 
 def MatchBlock(full, full_lum, full_grd, toFill, toFill_lum, toFill_grd, target_lum, target_grd, blockSize, alpha, tolerance, stochastic_mask = None):
 
