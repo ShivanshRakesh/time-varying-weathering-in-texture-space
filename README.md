@@ -30,23 +30,19 @@ pip install -r requirements.txt
 
 ### Usage
 
-- Custom input textures can be processed by passing the image path(s) as a list to the `processImages()` function.
-- Output images are written to `<project-root>/images/outputs/<image_name>/` if the `write_output` argument of `processImages()` is set `True`.
+- Custom input textures can be processed by passing the image path(s) as a list to the `run()` function.
+- Output images are written to `<project-root>/images/outputs/<image_name>/` if the `write_output` argument of `run()` is set `True`.
 
 ### Directory Structure
 ``` bash
 .
-├── documents
-│   ├── DIP Presentation.pdf
-│   └── DIP Presentation.pptx
-├── guidelines.md
 ├── images
 │   └── outputs
-├── proposal.md
 ├── README.md
 └── src
     ├── minimumCostPathFunc.py
     ├── project.ipynb
+    ├── project_withTests.ipynb
     └── textureTransfer.py
 ```
 
