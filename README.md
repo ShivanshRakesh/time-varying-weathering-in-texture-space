@@ -19,7 +19,7 @@ This project aims at achieving these goals without any user interaction or assis
 - Clone the repository and `cd` into the project directory.
 ```bash
 git clone https://github.com/ShivanshRakesh/time-varying-weathering-in-texture-space.git
-cd project-image-imposters/
+cd time-varying-weathering-in-texture-space/
 ```
 - Install the dependencies using:
 ```bash
