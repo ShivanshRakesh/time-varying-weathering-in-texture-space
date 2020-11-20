@@ -8,7 +8,7 @@ Given an input image of a weathered texture, this project aims to synthesise a s
 
 - Clone the repository and `cd` into the project directory.
 ```bash
-git clone https://github.com/Digital-Image-Processing-IIITH/project-image-imposters.git
+git clone https://github.com/ShivanshRakesh/time-varying-weathering-in-texture-space.git
 cd project-image-imposters/
 ```
 - Install the dependencies using:
