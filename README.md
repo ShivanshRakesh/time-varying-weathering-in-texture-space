@@ -1,23 +1,29 @@
-# Project
-Please make sure you follow the project [guidelines](./guidelines.md) carefully.
+# Time-varying weathering in Texture Space
 
+This project is an implementation of [this paper](https://www.cs.tau.ac.il/~dcor/articles/2016/TW.pdf). 
 
+Given an input image of a weathered texture, this project aims to synthesise a series of textures emulating a weathering and de-weathering processes, yielding a time-varying texture without any human interaction.
 
-# Time-varying Weathering in Texture Space
+### Setup
 
-[Time-varying Weathering in Texture Space](https://github.com/Digital-Image-Processing-IIITH/project-image-imposters) involves synthesize a series of textures emulating a weathering and de-weathering processes, yielding a time-varying texture for a given input image of a weathered texture
-
-## Cloning the Project
-
-You can clone the project to your local machine to run it. The following commands will give you a project that is set up and ready to use 
-
+- Clone the repository and `cd` into the project directory.
 ```bash
 git clone https://github.com/Digital-Image-Processing-IIITH/project-image-imposters.git
 cd project-image-imposters/
 ```
+- Install the dependencies using:
+```bash
+pip install -r requirements.txt
+```
+- Launch Jupyter Notebook in the project root using `jupyter-notebook`.
+- Navigate to `src/project.ipynb` and run all the cells to get the outputs for the default input textures.
 
-## Directory Structure of the Project
-The directory structure of the project is as follows : 
+### Usage
+
+- Custom input textures can be processed by passing the image path(s) as a list to the `processImages()` function.
+- Output images are written to `<project-root>/images/outputs/<image_name>/` if the `write_output` argument of `processImages()` is set `True`.
+
+### Directory Structure
 ``` bash
 .
 ├── documents
@@ -33,24 +39,9 @@ The directory structure of the project is as follows :
     ├── project.ipynb
     └── textureTransfer.py
 ```
-## Installing Dependencies 
-All the dependencies required for the project can be installed using requirements.txt
-To install the dependencies, run the command
-``` bash
-pip install -r requirements.txt
-```
-## Images Required :
-> The input images required for the project can be found in this link.
-### [images](https://drive.google.com/drive/folders/1z33_-5WgsFt1YqEMqCVcNJwen1u9VDFq?usp=sharing)
 
-> Note: It is required that all the downloaded images must be **copied to the images directory** in the project. All images have been named with proper formats.
-
-## Launching the Jupyter Notebook
-In order to Launch the Project , 
-- Launch jupyter notebook application within the project directory with 
-```bash
-jupyter-notebook
-```
-- Navigate to the src directory where project.ipynb is present
-- Open project.ipynb to launch the jupyter-notebook
-- Start running all the cells one by one sequentially to run the project and see the results 
+### Authors
+- [Shivansh Rakesh](https://github.com/ShivanshRakesh)
+- [Mohsin Mamoon Hafiz](https://github.com/MohsinMamoon)
+- [Mohee Datta Gupta](https://github.com/MoheeDG23)
+- [Srivathsan Baskaran](https://github.com/Srivathsan01)
