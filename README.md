@@ -42,7 +42,6 @@ pip install -r requirements.txt
 └── src
     ├── minimumCostPathFunc.py
     ├── project.ipynb
-    ├── project_withTests.ipynb
     └── textureTransfer.py
 ```
 
