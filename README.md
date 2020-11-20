@@ -4,6 +4,16 @@ This project is an implementation of [this paper](https://www.cs.tau.ac.il/~dcor
 
 Given an input image of a weathered texture, this project aims to synthesise a series of textures emulating a weathering and de-weathering processes, yielding a time-varying texture without any human interaction.
 
+### Objective
+
+![](/images/example.png)
+
+Given an input image of a weathered texture, this project aims to synthesize a series of textures emulating weathering and de-weathering processes, yielding a time-varying texture (like in the image above). This is done by computing an estimated age map of the texture based on the prevalence of similar patches in the texture. Further, using this age map, an intact texture is generated to achieve the desired results. 
+
+To produce de-weathered textures, the age map is manipulated to control an interpolation of the intact texture and the input texture. Weathered textures are synthesized by extrapolating the differences between the input texture and the intact texture.
+
+This project aims at achieving these goals without any user interaction or assistance.
+
 ### Setup
 
 - Clone the repository and `cd` into the project directory.
