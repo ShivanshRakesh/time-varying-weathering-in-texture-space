@@ -8,6 +8,8 @@ We have also used [this paper](https://people.eecs.berkeley.edu/~efros/research/
 
 Given an input image of a weathered texture, this project aims to synthesize a series of textures emulating weathering and de-weathering processes, yielding a time-varying texture (like in the images below).
 
+**Example outputs:**
+
 ![](/images/example.png)
 
 ![](/images/example2.png)
