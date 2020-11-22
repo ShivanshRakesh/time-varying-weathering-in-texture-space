@@ -52,6 +52,7 @@ pip install -r requirements.txt
 │   ├── minimumCostPathFunc.py
 │   ├── project.ipynb
 │   └── textureTransfer.py
+├── requirements.txt
 └── README.md
 ```
 
