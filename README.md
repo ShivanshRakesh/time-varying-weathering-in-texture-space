@@ -1,10 +1,12 @@
 # Time-varying weathering in Texture Space
 
-This project is an implementation of [this paper](https://www.cs.tau.ac.il/~dcor/articles/2016/TW.pdf). 
+This project is an implementation of [this paper](https://www.cs.tau.ac.il/~dcor/articles/2016/TW.pdf).
 
-Given an input image of a weathered texture, this project aims to synthesise a series of textures emulating a weathering and de-weathering processes, yielding a time-varying texture without any human interaction.
+We have also used [this paper](https://people.eecs.berkeley.edu/~efros/research/quilting/quilting.pdf) for the Quilting Algorithm.
 
 ### Objective
+
+Given an input image of a weathered texture, this project aims to synthesize a series of textures emulating weathering and de-weathering processes, yielding a time-varying texture (like in the images below).
 
 ![](/images/example.png)
 
@@ -14,7 +16,7 @@ Given an input image of a weathered texture, this project aims to synthesise a s
 
 ![](/images/example4.png)
 
-Given an input image of a weathered texture, this project aims to synthesize a series of textures emulating weathering and de-weathering processes, yielding a time-varying texture (like in the images above). This is done by computing an estimated age map of the texture based on the prevalence of similar patches in the texture. Further, using this age map, an intact texture is generated to achieve the desired results. 
+This is done by computing an estimated age map of the texture based on the prevalence of similar patches in the texture. Further, using this age map, an intact texture is generated to achieve the desired results. 
 
 To produce de-weathered textures, the age map is manipulated to control an interpolation of the intact texture and the input texture. Weathered textures are synthesized by extrapolating the differences between the input texture and the intact texture.
 
@@ -43,12 +45,14 @@ pip install -r requirements.txt
 ``` bash
 .
 ├── images
+│   :
 │   └── outputs
-├── README.md
-└── src
-    ├── minimumCostPathFunc.py
-    ├── project.ipynb
-    └── textureTransfer.py
+│       :
+├── src
+│   ├── minimumCostPathFunc.py
+│   ├── project.ipynb
+│   └── textureTransfer.py
+└── README.md
 ```
 
 ### Authors
