@@ -10,6 +10,8 @@ Given an input image of a weathered texture, this project aims to synthesize a s
 
 **Example outputs:**
 
+> The center subplot shows the input image, plots to the left of it are deweathered outputs and those to the right of it are weathered outputs.
+
 ![](/images/example.png)
 
 ![](/images/example2.png)
